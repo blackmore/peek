@@ -1,0 +1,27 @@
+defaults: &defaults
+  adapter: mysql
+  username: root
+  password: 
+  host:     localhost
+
+development:
+  database: peek_development
+  <<: *defaults
+
+  # Add more repositories
+  # repositories:
+  #   repo1:
+  #     adapter:  mysql
+  #     database: titelbild
+  #     username: titelbild
+  #     password: trackingpw
+  #     host:     10.1.1.246
+  #     socket: /tmp/mysql.sock
+
+test:
+  database: peek_test
+  <<: *defaults
+  
+production:
+  database: peek_production
+  <<: *defaults
