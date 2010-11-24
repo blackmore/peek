@@ -17,7 +17,11 @@ Peek::Application.routes.draw do
   #   resources :products
   
    #Sample resource route with options:
-     resources :jobs
+     resources :jobs do
+       collection do
+         get 'search'
+       end
+     end
 
   # Sample resource route with sub-resources:
   #   resources :products do

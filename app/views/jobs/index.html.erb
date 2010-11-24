@@ -1,5 +1,11 @@
-<h1>Jobs#index</h1>
-<p>Find me in app/views/jobs/index.html.erb</p>
+<% form_tag search_jobs_path, :method => "get", :remote => true do %>
+    Source: <%= select_tag("search[source]", options_for_select(Language.all_order.collect {|p| [ p.language, p.id ] })) %>
+	Target: <%= select_tag("search[target]", options_for_select(Language.all_order.collect {|p| [ p.language, p.id ] })) %>
+	Completed on: <%= text_field('search', 'start_date',  :order => [:month, :day, :year])%>
+	Finished on: <%= text_field('search', 'end_date',  :order => [:month, :day, :year])%>
+	Customer: <%= select_tag("search[customer_id]", options_for_select(Client.all_order.collect {|p| [ p.name, p.id ] }), :include_blank => true)%>
+	<%= submit_tag "get stats", :name => nil  %>
+<% end %>
 
 <div id="jobs">
 	<%= render @jobs %>

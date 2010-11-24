@@ -31,14 +31,34 @@ class Job
   # def manager
   #  self.staff.name
   # end
+  
+  # source
+  # target
+  # from_date
+  # to_date
+  # category
+  # client
+  
   def self.finished_subtitling_jobs(params) # Subtitles only!!
+    
     if params
+      # if params[:start_date] = ""
+      #   params[:start_date] = "01/01/2000"
+      # end
+      # 
+      # if params[:end_date] = ""
+      #   params[:end_date] = Time.now
+      # end
+      
       all(
           :production_status => 2,
-          :category.not => (4..5), # NOT including Live and Translation
+          :category.not => (4,5), # NOT including Live and Translation
           :order => :deadline.desc,
           :created_on.gte => Chronic::parse(params[:start_date]),
-          :deadline.lte => Chronic::parse(params[:end_date]), 
+          :deadline.lte => Chronic::parse(params[:end_date]),
+          :client => {
+                       :id => customer
+          },
           :description => {
                             :source_language => params[:source].to_i,
                             :target_language => params[:target].to_i

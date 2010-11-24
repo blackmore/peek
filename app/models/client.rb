@@ -24,4 +24,8 @@ class Client
   
   has n, :jobs,             :child_key => [:customerid]
   
+  def self.all_order
+    all(:order => [:name.asc])
+  end
+  
 end
