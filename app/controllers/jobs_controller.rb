@@ -1,11 +1,12 @@
 class JobsController < ApplicationController
-  
+
   def index
-     @jobs = Job.finished_subtitling_jobs(params[:search])
+     @languages = Language.all_order
+     @clients = Client.all_order
   end
   
   def search
-     @jobs = Job.finished_subtitling_jobs(params[:search])
+     @jobs = Job.filter_jobs(params[:search])
   end
   
   

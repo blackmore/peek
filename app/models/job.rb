@@ -26,60 +26,44 @@ class Job
   belongs_to :user,             :child_key => [:managerid]
 
   # # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-  # # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-  # 
-  # def manager
-  #  self.staff.name
-  # end
-  
-  # source
-  # target
-  # from_date
-  # to_date
-  # category
-  # client
-  
-  def self.finished_subtitling_jobs(params) # Subtitles only!!
-    
-    if params
-      # if params[:start_date] = ""
-      #   params[:start_date] = "01/01/2000"
-      # end
-      # 
-      # if params[:end_date] = ""
-      #   params[:end_date] = Time.now
-      # end
-      
-      all(
-          :production_status => 2,
-          :category.not => (4,5), # NOT including Live and Translation
-          :order => :deadline.desc,
-          :created_on.gte => Chronic::parse(params[:start_date]),
-          :deadline.lte => Chronic::parse(params[:end_date]),
-          :client => {
-                       :id => customer
-          },
-          :description => {
-                            :source_language => params[:source].to_i,
-                            :target_language => params[:target].to_i
-                           }
-          )
-    else
-      all()
-    end
-  end
-  
-  def self.finished_translation_jobs(scope, source, target)
-    all(
-        :production_status => 2,
-        :category => 4, # Only Translation
-        :order => :deadline.desc,
-        :limit => scope,
-        :description => {
-                          :source_language => source,
-                          :target_language => target
-                         }
-        )
-  end
+  private
+  def self.filter_jobs(params)
+     conditions = {:production_status => 2, :order => :deadline.desc}
 
+      unless params[:start_date].blank? 
+        conditions["deadline.gte"] = Chronic::parse(params[:start_date])
+      else
+        conditions["deadline.gte"] = Chronic::parse("01/01/1990")
+      end
+      
+      unless params[:end_date].blank? 
+        conditions["deadline.lte"] = Chronic::parse(params[:end_date])
+      else
+        conditions["deadline.lte"] = Time.now
+      end
+      
+      unless params[:source] == "All"
+        conditions[:description] = {:source_language => params[:source].to_i}
+      end
+      
+      unless params[:target] == "All"
+        conditions[:description] = {:target_language => params[:target].to_i}
+      end
+      
+      unless params[:customer_id] == "All"
+        conditions[:client] = {:id => params[:customer_id]}
+      end
+      
+      unless params[:title].blank?
+        conditions["title.like"] = "%#{params[:title]}%"
+      end
+      
+      categories = params[:category].delete_if { |x| x == "" }
+      unless categories.empty?
+        conditions[:category] = categories
+      end
+      
+    all(conditions)
+  end
+  
 end
