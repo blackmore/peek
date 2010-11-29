@@ -28,7 +28,7 @@ class Job
   # # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
   private
   def self.filter_jobs(params)
-     conditions = {:production_status => 2, :order => :deadline.desc}
+     conditions = {:production_status => 2, :order => :deadline.desc,  }
 
       unless params[:start_date].blank? 
         conditions["deadline.gte"] = Chronic::parse(params[:start_date])
@@ -47,11 +47,15 @@ class Job
       end
       
       unless params[:target] == "All"
-        conditions[:description] = {:target_language => params[:target].to_i}
+        if conditions.has_key?(:description)
+          conditions[:description].merge!({:target_language => params[:target].to_i})
+        else
+          conditions[:description] = {:target_language => params[:target].to_i}
+        end
       end
       
-      unless params[:customer_id] == "All"
-        conditions[:client] = {:id => params[:customer_id]}
+      unless params[:client] == "All"
+        conditions[:client] = {:id => params[:client]}
       end
       
       unless params[:title].blank?

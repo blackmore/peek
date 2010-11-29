@@ -1,16 +1,36 @@
-<% form_tag search_jobs_path, :method => "get", :remote => true do %>
-    Source: <%= select_tag("search[source]", options_for_select(["All"] + @languages.collect {|p| [ p.language, p.id ] })) %>
-	Target: <%= select_tag("search[target]", options_for_select(["All"] + @languages.collect {|p| [ p.language, p.id ] })) %>
-	Completed on: <%= text_field('search', 'start_date',  :order => [:month, :day, :year])%>
-    Completed on: <%= text_field('search', 'end_date',  :order => [:month, :day, :year])%>
-	Customer: <%= select_tag("search[customer_id]", options_for_select(["All"] + Client.all_order.collect {|p| [ p.name, p.id ] }))%>
-	Title: <%= text_field('search', 'title')%>
-	Categorys: DVD:<%= check_box("search", "category",{:multiple => true}, "1", nil)%>
-			   VIDEO:<%= check_box("search", "category",{:multiple => true}, "2", nil)%>
-			   FILM:<%= check_box("search", "category",{:multiple => true}, "3", nil)%>
-			   TRANS:<%= check_box("search", "category",{:multiple => true}, "4", nil)%>
-			   LIVE:<%= check_box("search", "category",{:multiple => true}, "5", nil)%>
-			   TV:<%= check_box("search", "category",{:multiple => true}, "6", nil)%>
+<%= semantic_form_for :search, :html => { :method => :get }, :url => search_jobs_path, :remote => true do |form| %>
+	<%= form.input :source,
+    :as => :select, 
+    :collection => @languages, 
+    :required => false, 
+    :label => "Source Language:", 
+    :include_blank => false %>
+	<%= form.input :target,
+    :as => :select, 
+    :collection => @languages, 
+    :required => false, 
+    :label => "Target Language:", 
+    :include_blank => false %>
+	<%= form.input :start_date,
+	:required => false,
+	:order => [:month, :day, :year],
+	:label => "From:"%>
+	<%= form.input :end_date,
+	:order => [:month, :day, :year],
+	:label => "End:",
+	:required => false%>
+	<%= form.input :client,
+    :as => :select, 
+    :collection => @clients, 
+    :required => false, 
+    :label => "Clients:", 
+    :include_blank => false %>
+	<%= form.input :title,
+	:label => "Title:",
+	:required => false %>
+	<%= form.input :category,
+	:as => :check_boxes,
+	:collection => [["DVD", 1], ["VIDEO", 2], ["FILM", 3], ["TRANS", 4], ["LIVE", 5], ["TV", 6] ] %>
 	<%= submit_tag "get stats", :name => nil  %>
 <% end %>
 

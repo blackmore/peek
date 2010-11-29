@@ -38,6 +38,8 @@ gem 'dm-observer',          DM_VERSION
 # java script setup
 gem 'jquery-rails'
 
+gem 'formtastic', '~> 1.1.0'
+
 # Date time parsing
 gem 'chronic'
 

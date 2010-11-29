@@ -8,17 +8,17 @@ class Client
   # remap to rails conventions
   property :id,             Serial,     :field => 'CustomerID'
   property :name,           String,     :field => 'Name'
-  property :address,        String,     :field => 'Anschrift'
-  property :street,         String,     :field => 'Strasse'
-  property :plz,            String,     :field => 'PLZ'
-  property :county,         String,     :field => 'Ort'
-  property :country,        String,     :field => 'Land'
-  property :phone_number,   String,     :field => 'Telefon'
-  property :fax_number,     String,     :field => 'Fax'
-  property :email,          String,     :field => 'EMail'
-  property :website,        String,     :field => 'Website'
-  property :contact,        String,     :field => 'Ansprechpartner'
-  property :comments,       String,     :field => 'Kommentar'
+  property :address,        String,     :field => 'Anschrift'       ,:lazy => true
+  property :street,         String,     :field => 'Strasse'         ,:lazy => true
+  property :plz,            String,     :field => 'PLZ'             ,:lazy => true
+  property :county,         String,     :field => 'Ort'             ,:lazy => true
+  property :country,        String,     :field => 'Land'            ,:lazy => true
+  property :phone_number,   String,     :field => 'Telefon'         ,:lazy => true
+  property :fax_number,     String,     :field => 'Fax'             ,:lazy => true
+  property :email,          String,     :field => 'EMail'           ,:lazy => true
+  property :website,        String,     :field => 'Website'         ,:lazy => true
+  property :contact,        String,     :field => 'Ansprechpartner' ,:lazy => true
+  property :comments,       String,     :field => 'Kommentar'       ,:lazy => true
   property :active,         Boolean,    :field => 'Active'
   property :updated_on,     DateTime,   :field => 'LastChanged'
   
