@@ -1,3 +1,7 @@
+/* @override http://0.0.0.0:3000/stylesheets/formtastic_changes.css?1291117734 */
+
+/* @override http://0.0.0.0:3000/stylesheets/formtastic_changes.css?1290679250 */
+
 /* -------------------------------------------------------------------------------------------------
 
 Load this stylesheet after formtastic.css in your layouts to override the CSS to suit your needs.
@@ -12,3 +16,17 @@ The following style may be *conditionally* included for improved support on olde
 form.formtastic fieldset ol li fieldset legend { margin-left: -6px;}
 
 --------------------------------------------------------------------------------------------------*/
+
+#search_category_input fieldset ol li{
+	float: left;
+	padding-right: 20px;
+}
+
+input#search_start_date.hasDatepicker,
+input#search_end_date.hasDatepicker {
+	width: 10%;
+}
+
+
+
+

@@ -1,5 +1,6 @@
 class Job
-
+  include JobStats
+  
   include DataMapper::Resource
 
   # set the storage name for the :default repository
@@ -27,6 +28,12 @@ class Job
 
   # # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
   private
+  def Job.get_stats(col)
+    col.each do |job|
+      job.stats
+    end
+  end
+  
   def self.filter_jobs(params)
      conditions = {:production_status => 2, :order => :deadline.desc,  }
 
@@ -65,9 +72,11 @@ class Job
       categories = params[:category].delete_if { |x| x == "" }
       unless categories.empty?
         conditions[:category] = categories
+      else
+        conditions[:category] = [1,2,3,6]
       end
       
-    all(conditions)
+    get_stats(all(conditions))
   end
   
 end

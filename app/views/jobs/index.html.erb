@@ -1,38 +1,55 @@
-<%= semantic_form_for :search, :html => { :method => :get }, :url => search_jobs_path, :remote => true do |form| %>
-	<%= form.input :source,
-    :as => :select, 
-    :collection => @languages, 
-    :required => false, 
-    :label => "Source Language:", 
-    :include_blank => false %>
-	<%= form.input :target,
-    :as => :select, 
-    :collection => @languages, 
-    :required => false, 
-    :label => "Target Language:", 
-    :include_blank => false %>
-	<%= form.input :start_date,
-	:required => false,
-	:order => [:month, :day, :year],
-	:label => "From:"%>
-	<%= form.input :end_date,
-	:order => [:month, :day, :year],
-	:label => "End:",
-	:required => false%>
-	<%= form.input :client,
-    :as => :select, 
-    :collection => @clients, 
-    :required => false, 
-    :label => "Clients:", 
-    :include_blank => false %>
-	<%= form.input :title,
-	:label => "Title:",
-	:required => false %>
-	<%= form.input :category,
-	:as => :check_boxes,
-	:collection => [["DVD", 1], ["VIDEO", 2], ["FILM", 3], ["TRANS", 4], ["LIVE", 5], ["TV", 6] ] %>
-	<%= submit_tag "get stats", :name => nil  %>
+<h1>Subtitle Statistics</h1>
+
+<%=  semantic_form_for :search, :html => { :method => :get }, :url => search_jobs_path, :remote => true do |form| %>
+	<%= form.inputs do %>
+		<%= form.input :category,
+		:label => "Job Type",
+		:as => :check_boxes,
+		:required => false,
+		:collection => [["DVD", 1], ["VIDEO", 2], ["FILM", 3], ["TV", 6] ]%>
+	<% end %>
+	<%= form.inputs do %>
+		<%= form.input :source,
+	    :as => :select,
+	    :collection => @languages, 
+	    :required => false, 
+	    :label => "Source Language", 
+	    :include_blank => false %>
+		<%= form.input :target,
+	    :as => :select, 
+	    :collection => @languages,
+	    :required => false,
+	    :label => "Target Language", 
+	    :include_blank => false %>
+	<% end %>
+	<%= form.inputs do %>
+	 	<%= form.input :start_date,
+		:required => false,
+		:order => [:month, :day, :year],
+		:label => "Date From"%>
+		<%= form.input :end_date,
+		:order => [:month, :day, :year],
+		:label => "Date Up To",
+		:required => false%>
+	<% end %>
+	<%= form.inputs do %>
+		<%= form.input :client,
+	    :as => :select,
+	    :collection => @clients, 
+	    :required => false, 
+	    :label => "Client", 
+	    :include_blank => false %>
+		<%= form.input :title,
+		:label => "Title",
+		:as => :search, 
+		:required => false %>
+	<% end %>
+	<%= form.buttons %>
 <% end %>
+
+<div id="av">
+	
+</div>
 
 <div id="jobs">
 
