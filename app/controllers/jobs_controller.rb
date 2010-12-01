@@ -6,8 +6,6 @@ class JobsController < ApplicationController
      
      @clients = Client.all_order.collect { |p| [ p.name, p.id ] }
      @clients.unshift(["All", "All"])
-     
-     
   end
   
   def search

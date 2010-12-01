@@ -1,3 +1,15 @@
+/* @override http://0.0.0.0:3000/stylesheets/global_styles.css?1291111896 */
+
 body {
 	font: 17px "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
+}
+
+#loading {
+	color: white;
+	font-size: 40px;
+	font-weight: bold;
+	margin-right: auto;
+	margin-left: auto;
+	margin-top: 200px;
+	display: block;
 }
