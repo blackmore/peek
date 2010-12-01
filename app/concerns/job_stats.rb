@@ -11,6 +11,8 @@ module JobStats
   end
 
   def stats
+     @job_run_length = self.description.run_length
+     
      total_pr = 0
      total_dm = 0
      total_qa = 0
@@ -28,9 +30,8 @@ module JobStats
          when 6 then total_son += parse_to_minutes(t.duration)
          end
        end
-    r = self.description.run_length ||= 1
        
-     Hash["r_length" => r, "sub_minutes" => total_sub,"pr_minutes" => total_pr, "qa_minutes" => total_qa, "md_minutes" => total_dm, "son_minutes" => total_son ]
+     Hash["r_length" => @job_run_length, "sub_minutes" => total_sub,"pr_minutes" => total_pr, "qa_minutes" => total_qa, "md_minutes" => total_dm, "son_minutes" => total_son ]
   end
     
 end

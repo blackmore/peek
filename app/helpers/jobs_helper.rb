@@ -1,18 +1,19 @@
 module JobsHelper
   
-  def output_ratio(taken_minutes, run_length)
-    unless run_length == 1
-    ratio = (taken_minutes/run_length.to_f).round(2)
-  else
-    "SORRY BAD DATA"
-  end
+  def output_ratio(minutes, run_length)
+    unless run_length.nil?
+      ratio = (minutes/run_length.to_f).round(1)
+      "SUB(1:#{ratio})"
+    else
+      "SUB(<span class='data_missing'>DATA?</span>)".html_safe
+    end
   end
   
  def dis_average(jobs)
     array_of_sub_rations = Array.new
     
     jobs.each do |job|
-      unless job.stats["r_length"] == 1
+      unless job.stats["r_length"].nil?
         array_of_sub_rations << (job.stats["sub_minutes"] / job.stats["r_length"].to_f).round(2)
       else
         array_of_sub_rations << 0

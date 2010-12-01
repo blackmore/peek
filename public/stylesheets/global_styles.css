@@ -13,3 +13,7 @@ body {
 	margin-top: 200px;
 	display: block;
 }
+
+span.data_missing {
+	color: #cc0101;
+}
