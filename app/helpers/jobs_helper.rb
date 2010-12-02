@@ -1,13 +1,42 @@
 module JobsHelper
   
   def output_ratio(minutes, run_length)
-    unless run_length.nil?
-      ratio = (minutes/run_length.to_f).round(1)
-      "SUB(1:#{ratio})"
+    unless run_length.nil? || minutes == 0
+      (minutes/run_length.to_f).round(1)
     else
-      "SUB(<span class='data_missing'>DATA?</span>)".html_safe
+      "<span class='data_missing'>MISSING!</span>".html_safe
     end
   end
+  
+  def total_sub_minutes(minutes)
+    unless minutes.nil?
+      "#{minutes} mins"
+    else
+      "<span class='data_missing'>DATA MISSING!</span>".html_safe
+    end
+  end
+  
+  def run_length(minutes)
+    unless minutes.nil?
+      "Run Length: #{minutes} mins"
+    else
+      "Run Length: <span class='data_missing'>DATA MISSING!</span>".html_safe
+    end
+  end
+  
+  def proof_reading_ratio(proof_minutes, minutes)
+    unless proof_minutes == 0 || minutes.nil?
+      (minutes/proof_minutes.to_f).round(1)
+    end
+  end
+  
+  def son_ratio(son_minutes, minutes)
+    unless son_minutes == 0 || minutes.nil?
+      (minutes/son_minutes.to_f).round(1)
+    end
+  end
+  
+  
   
  def dis_average(jobs)
     array_of_sub_rations = Array.new

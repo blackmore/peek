@@ -23,6 +23,7 @@ $(function() {
 	// ajax loading mask 
 	$("#custom_search").bind("ajaxStart", function(){
 	    $overlay.fadeIn();
+	    $("#job_search_results tr:not(.table-header)").remove();
 	}).bind("ajaxStop", function(){
 	    $overlay.fadeOut();
 	});
