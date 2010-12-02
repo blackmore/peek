@@ -25,12 +25,13 @@ class Job
   has n, :tasks,                :child_key => [:productionid]
   belongs_to :client,           :child_key => [:customerid]
   belongs_to :user,             :child_key => [:managerid]
+  
 
   # # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
   private
-  def Job.get_stats(col)
+  def self.get_stats(col)
     col.each do |job|
-      job.stats
+      job.statistics
     end
   end
   
@@ -76,7 +77,7 @@ class Job
         conditions[:category] = [1,2,3,6]
       end
       
-    get_stats(all(conditions))
+    all(conditions)
   end
   
 end

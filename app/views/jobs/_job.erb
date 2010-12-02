@@ -1,7 +1,9 @@
 <tr>
 	<td><a href="http://10.1.1.246/production/tracking.php?action=load&ProductionID=<%= job.id %>"><%= job.title %></a></td>
-	<td><%= job.stats['run_length'] %></td>
-	<td></td>
-	<td>QA</td>
-	<td></td>
+	<% @stats = job.statistics %>
+	<td><%= @stats[:ratio_subtitle] %></td>
+	<td><%= @stats[:ratio_translation] %></td>
+	<td><%= @stats[:ratio_proof_reading] %></td>
+	<td><%= @stats[:ratio_quality_assurance] %></td>
+	<td><%= @stats[:ratio_other] %></td>
 </tr>

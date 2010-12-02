@@ -24,10 +24,10 @@ module JobStats
     end
   end
 
-  def stats
+  def statistics
      @run_length = self.description.run_length ||= nil
      
-     [@subtitle, @translation, @proof_reading, @quality_assurance, @other].collect { |x| x = nil }
+     #[@subtitle, @translation, @proof_reading, @quality_assurance, @other].collect { |x| x = nil }
        self.task_times.each do |t|
          case t.job_type
          when 1 
@@ -46,13 +46,20 @@ module JobStats
        end
        
      @statistics = {
-                      'total' => [@subtitle, @translation, @proof_reading, @quality_assurance, @other],
-                      'ratio' => [to_ratio(@subtitle), to_ratio(@translation), to_ratio(@proof_reading), to_ratio(@quality_assurance), to_ratio(@other)],
-                      'run_length' => @run_length
+                      :subtitle =>        @subtitle,
+                      :translation =>     @translation,
+                      :proof_reading     => @proof_reading,
+                      :quality_assurance => @quality_assurance,
+                      :other => @other,
+                      :ratio_subtitle => to_ratio(@subtitle),
+                      :ratio_translation => to_ratio(@translation),
+                      :ratio_proof_reading => to_ratio(@proof_reading),
+                      :ratio_quality_assurance => to_ratio(@quality_assurance),
+                      :ratio_other => to_ratio(@other), 
+                      :run_length => @run_length
      }
-     puts "hash: #{@statistics['ratio'][0]}"
+    
      return @statistics
-     #Hash["r_length" => @job_run_length, "sub_minutes" => @subtitle,"pr_minutes" => @proof_reading, "qa_minutes" => @quality_assurance, "son_minutes" => @other ]
   end
     
 end
