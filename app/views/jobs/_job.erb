@@ -1,7 +1,7 @@
 <tr>
 	<td><a href="http://10.1.1.246/production/tracking.php?action=load&ProductionID=<%= job.id %>"><%= job.title %></a></td>
-	<td><%= output_ratio(job.stats["sub_minutes"], job.stats["r_length"]) %></td>
-	<td><%= proof_reading_ratio(job.stats["pr_minutes"], job.stats["r_length"]) %></td>
+	<td><%= job.stats['run_length'] %></td>
+	<td></td>
 	<td>QA</td>
-	<td><%= son_ratio(job.stats["son_minutes"], job.stats["r_length"]) %></td>
+	<td></td>
 </tr>
