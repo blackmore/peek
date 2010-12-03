@@ -26,7 +26,7 @@ module JobStats
 
   def statistics
      @run_length = self.description.run_length ||= nil
-     
+     puts "- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -"
      #[@subtitle, @translation, @proof_reading, @quality_assurance, @other].collect { |x| x = nil }
        self.task_times.each do |t|
          case t.job_type

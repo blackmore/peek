@@ -1,5 +1,6 @@
 class Job
   include JobStats
+  attr_accessor :mystats
   
   include DataMapper::Resource
 
@@ -31,7 +32,7 @@ class Job
   private
   def self.get_stats(col)
     col.each do |job|
-      job.statistics
+      job.mystats = job.statistics
     end
   end
   
@@ -77,7 +78,7 @@ class Job
         conditions[:category] = [1,2,3,6]
       end
       
-    all(conditions)
+    get_stats(all(conditions))
   end
   
 end
