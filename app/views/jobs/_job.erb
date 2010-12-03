@@ -1,9 +1,5 @@
 <tr>
 	<td><a href="http://10.1.1.246/production/tracking.php?action=load&ProductionID=<%= job.id %>"><%= job.title %></a></td>
-	<td><%= job.mystats[:ratio_subtitle] %></td>
-	<td><%= job.mystats[:ratio_translation] %></td>
-	<td><%= job.mystats[:ratio_proof_reading] %></td>
-	<td><%= job.mystats[:ratio_quality_assurance] %></td>
-	<td><%= job.mystats[:ratio_other] %></td>
-	<td><%= ratio_total(job) %></td>
+	<td><%= job.subtitle_mins %></td>
+
 </tr>

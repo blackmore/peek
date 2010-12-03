@@ -1,6 +1,9 @@
 class Job
   include JobStats
-  attr_accessor :mystats
+  
+  attr_accessor :subtitle_mins, :translation_mins, :proof_reading_mins, :quality_assurance_mins, :other_mins
+  attr_accessor :ratio_subtitle, :ratio_translation, :ratio_proof_reading, :ratio_quality_assurance, :ratio_other
+  attr_accessor :run_length
   
   include DataMapper::Resource
 
@@ -32,7 +35,9 @@ class Job
   private
   def self.get_stats(col)
     col.each do |job|
-      job.mystats = job.statistics
+      job.statistics
+      #job.subtitle_mins = stats[:subtitle_mins]
+      puts "- #{job.subtitle_mins}- - - - - - SUM MINS- - - - - - - - - - - - - - - - - -"
     end
   end
   

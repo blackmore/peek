@@ -1,10 +1,20 @@
+# subtitle
+# translation
+# proof_reading
+# quality_assurance
+# other
+# ratio_subtitle
+# ratio_translation
+# ratio_proof_reading
+# ratio_quality_assurance
+# ratio_other
+# run_length
+
 module JobStats
 
-  def to_min(str)
-    if str
-      m = str.split(":")
-      m.collect! { |x| x.to_i }
-      total = m[0]*60 + m[1]
+  def to_minutes(str)
+    if /(\d\d):(\d\d):(\d\d)/.match str
+      $1.to_i*60 + $2.to_i
     else
       0
     end
@@ -19,58 +29,42 @@ module JobStats
   end
   
   def to_ratio(minutes)
-    unless minutes.nil? || @run_length.nil?
-      (minutes/@run_length.to_f).round(1)
+    unless minutes.nil? || self.run_length.nil?
+      (minutes/self.run_length.to_f).round(1)
     end
   end
 
   def statistics
-     @run_length = self.description.run_length ||= nil
-     puts "- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -"
-     #[@subtitle, @translation, @proof_reading, @quality_assurance, @other].collect { |x| x = nil }
+     self.run_length = self.description.run_length ||= nil
+     
        self.task_times.each do |t|
          case t.job_type
          when 1 
-           @subtitle = add_up_minutes(@subtitle, to_min(t.duration))
+           @subtitle = add_up_minutes(@subtitle, to_minutes(t.duration))
          when 2
-           @translation = add_up_minutes(@translation, to_min(t.duration))
+           @translation = add_up_minutes(@translation, to_minutes(t.duration))
          when 3
-           @proof_reading = add_up_minutes(@proof_reading, to_min(t.duration))
+           @proof_reading = add_up_minutes(@proof_reading, to_minutes(t.duration))
          when 4
-           @quality_assurance = add_up_minutes(@quality_assurance, to_min(t.duration))
+           @quality_assurance = add_up_minutes(@quality_assurance, to_minutes(t.duration))
          when 6
-           @other = add_up_minutes(@other, to_min(t.duration))
+           @other = add_up_minutes(@other, to_minutes(t.duration))
          else
            next
          end
        end
        
-     @statistics = {
-                      :subtitle =>        @subtitle,
-                      :translation =>     @translation,
-                      :proof_reading     => @proof_reading,
-                      :quality_assurance => @quality_assurance,
-                      :other => @other,
-                      :ratio_subtitle => to_ratio(@subtitle),
-                      :ratio_translation => to_ratio(@translation),
-                      :ratio_proof_reading => to_ratio(@proof_reading),
-                      :ratio_quality_assurance => to_ratio(@quality_assurance),
-                      :ratio_other => to_ratio(@other), 
-                      :run_length => @run_length
-     }
+    self.subtitle_mins = @subtitle
+    self.translation_mins = @translation
+    self.proof_reading_mins = @proof_reading
+    self.quality_assurance_mins = @quality_assurance
+    self.other_mins = @other
     
-     return @statistics
+    self.ratio_subtitle = to_ratio(@subtitle)
+    self.ratio_translation = to_ratio(@translation)
+    self.ratio_proof_reading = to_ratio(@proof_reading)
+    self.ratio_quality_assurance = to_ratio(@quality_assurance)
+    self.ratio_other = to_ratio(@other)
   end
     
 end
-# subtitle
-# translation
-# proof_reading
-# quality_assurance
-# other
-# ratio_subtitle
-# ratio_translation
-# ratio_proof_reading
-# ratio_quality_assurance
-# ratio_other
-# run_length

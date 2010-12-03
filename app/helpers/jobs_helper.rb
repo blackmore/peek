@@ -1,15 +1,15 @@
 module JobsHelper
-  def ratio_total(job)
-    ratio_array = [ job.mystats[:ratio_subtitle],
-                    job.mystats[:ratio_translation],
-                    job.mystats[:ratio_proof_reading],
-                    job.mystats[:ratio_quality_assurance],
-                    job.mystats[:ratio_other]
-    ]
-    ratio_array.delete_if { |x| x.nil? }
-    total = ratio_array.inject(0) { |s,v| s += v }
-    total.round(1)
-  end
+ # def ratio_total(job)
+ #   ratio_array = [ job.mystats[:ratio_subtitle],
+ #                   job.mystats[:ratio_translation],
+ #                   job.mystats[:ratio_proof_reading],
+ #                   job.mystats[:ratio_quality_assurance],
+ #                   job.mystats[:ratio_other]
+ #   ]
+ #   ratio_array.delete_if { |x| x.nil? }
+ #   total = ratio_array.inject(0) { |s,v| s += v }
+ #   total.round(1)
+ # end
 #   
 #   def output_ratio(minutes, run_length)
 #     unless run_length.nil? || minutes == 0
