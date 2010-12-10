@@ -1,4 +1,5 @@
 # set :ruby, "/usr/local/bin"
+default_run_options[:pty] = true
 set :application, "peek"
 set :repository,  "git@github.com:blackmore/peek.git"
 set :applicationdir, "/home/administrator/webapps/#{application}"
@@ -20,7 +21,6 @@ set :scm_verbose, true
 server "10.1.1.201", :app, :web, :db, :primary => true, :user => 'administrator'
 
 set :deploy_via, :export
-default_run_options[:pty] = true
 set :chmod755, "app config db lib public vendor script script/* public/disp*"
 set :use_sudo, true
 
