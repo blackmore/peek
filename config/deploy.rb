@@ -22,7 +22,7 @@ server "10.1.1.201", :app, :web, :db, :primary => true, :user => 'administrator'
 set :deploy_via, :export
 default_run_options[:pty] = true
 set :chmod755, "app config db lib public vendor script script/* public/disp*"
-set :use_sudo, false
+set :use_sudo, true
 
 # set :user, 'administrator'  # Your hosting account's username
 # set :domain, '10.1.1.201'  # Hosting servername where your account is located
