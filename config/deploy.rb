@@ -1,6 +1,8 @@
 # set :ruby, "/usr/local/bin"
 set :application, "peek"
 set :repository,  "git@github.com:blackmore/peek.git"
+set :applicationdir, "/home/administrator/webapps/#{user}/#{application}"
+
 
 # If you aren't deploying to /u/apps/#{application} on the target
 # servers (which is the default), you can specify the actual location
@@ -11,8 +13,11 @@ set :repository,  "git@github.com:blackmore/peek.git"
 # your SCM below:
 
 set :scm, :git
-set :runner, nil
+set :branch, 'master'
 server "10.1.1.201", :app, :web, :db, :primary => true, :user => 'administrator'
+
+default_run_options[:pty] = true
+set :chmod755, "app config db lib public vendor script script/* public/disp*"
 
 # set :user, 'administrator'  # Your hosting account's username
 # set :domain, '10.1.1.201'  # Hosting servername where your account is located
