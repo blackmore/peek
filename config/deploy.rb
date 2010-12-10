@@ -2,6 +2,7 @@
 set :application, "peek"
 set :repository,  "git@github.com:blackmore/peek.git"
 set :applicationdir, "/home/administrator/webapps/#{application}"
+set :deploy_to applicationdir
 
 
 # If you aren't deploying to /u/apps/#{application} on the target
