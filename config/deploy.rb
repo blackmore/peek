@@ -1,7 +1,7 @@
 # set :ruby, "/usr/local/bin"
 set :application, "peek"
 set :repository,  "git@github.com:blackmore/peek.git"
-set :applicationdir, "/home/administrator/webapps/#{user}/#{application}"
+set :applicationdir, "/home/administrator/webapps/#{application}"
 
 
 # If you aren't deploying to /u/apps/#{application} on the target
