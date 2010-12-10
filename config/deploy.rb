@@ -1,22 +1,36 @@
-set :application, "set your application name here"
-set :repository,  "set your repository location here"
-
-set :scm, :subversion
-# Or: `accurev`, `bzr`, `cvs`, `darcs`, `git`, `mercurial`, `perforce`, `subversion` or `none`
-
-role :web, "your web-server here"                          # Your HTTP server, Apache/etc
-role :app, "your app-server here"                          # This may be the same as your `Web` server
-role :db,  "your primary db-server here", :primary => true # This is where Rails migrations will run
-role :db,  "your slave db-server here"
+set :user, 'administrator'  # Your hosting account's username
+set :domain, '10.1.1.201'  # Hosting servername where your account is located
+set :project, 'peek'  # Your application as its called in the repository
+set :application, 'dev01.titelbild.de'  # Your app's location (domain or subdomain)
+set :applicationdir, "/home/administrator/webapps/#{user}/#{application}"  # The location of your application on your hosting (my differ for each hosting provider)
+# version control config
+set :scm, 'git'
+set :repository,  "git@github.com:blackmore/peek.git" # Your git repository location
+set :deploy_via, :remote_cache
+set :git_enable_submodules, 1 # if you have vendored rails
+set :branch, 'master'
+set :git_shallow_clone, 1
+set :scm_verbose, true
+# roles (servers)
+role :web, domain
+role :app, domain
+role :db,  domain, :primary => true
+# deploy config
+set :deploy_to, applicationdir # deploy to directory set above
+set :deploy_via, :export
+# additional settings
+default_run_options[:pty] = true  # Forgo errors when deploying from windows
+set :chmod755, "app config db lib public vendor script script/* public/disp*"
+set :use_sudo, false
 
 # If you are using Passenger mod_rails uncomment this:
 # if you're still using the script/reapear helper you will need
 # these http://github.com/rails/irs_process_scripts
 
-# namespace :deploy do
-#   task :start do ; end
-#   task :stop do ; end
-#   task :restart, :roles => :app, :except => { :no_release => true } do
-#     run "#{try_sudo} touch #{File.join(current_path,'tmp','restart.txt')}"
-#   end
-# end
+namespace :deploy do
+  task :start do ; end
+  task :stop do ; end
+  task :restart, :roles => :app, :except => { :no_release => true } do
+    run "#{try_sudo} touch #{File.join(current_path,'tmp','restart.txt')}"
+  end
+end
