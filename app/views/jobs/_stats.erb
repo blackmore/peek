@@ -1,0 +1,55 @@
+<script type="text/javascript" charset="utf-8">
+$(function () {
+	new Highcharts.Chart({
+		chart: {
+			renderTo: "charts",
+			defaultSeriesType: 'spline'
+		},
+		plotOptions: {
+		         spline: {
+		            marker: {
+		               radius: 0,
+		               lineColor: '#666666',
+		               lineWidth: 0.5
+		            }
+		         }
+		      },
+		title: {
+			text: "Job Ratios"
+		},
+		xAxis: {
+			allowDecimals: false,
+			showFirstLabel: false,
+			title: {
+				text: "Jobs in scope"
+			}
+		},
+		yAxis: {
+			title: {
+				text: "Ratio 1:"
+			}
+		},
+        tooltip: {
+            enabled: false
+        },
+		series: [{
+			name: "total time ratio",
+			data: <%= chart_date(@jobs)  %>
+		}]
+	});
+});
+</script>
+<% unless @jobs.empty? %>
+	<div id="total_stats_details">
+		<p>Jobs in scope: <%= @jobs.length %></p>
+		<p>Total Run Length: <%= total_minutes(@jobs) %></p>
+		<p>Ratio subtitle: <%= average_ratio_subtitles(@jobs) %></p>
+		<p>Ratio Translation: <%= average_ratio_translation(@jobs) %></p>
+		<p>Ratio Proof Reading: <%= average_ratio_proof_reading(@jobs) %></p>
+		<p>Ratio Quality Assurance: <%= average_ratio_quality_assurance(@jobs) %></p>
+		<p>Ratio Others: <%= average_ratio_other(@jobs) %>
+		<p>Ratio Total: <%= average_ratio_total(@jobs) %>
+	</div>
+<% else %>
+	<p>No matching jobs</p>
+<% end %>

@@ -29,8 +29,23 @@ module JobStats
   end
   
   def to_ratio(minutes)
-    unless minutes.nil? || self.run_length.nil?
+    unless minutes.nil? || self.run_length.nil? || minutes == 0 || self.run_length == 0
       (minutes/self.run_length.to_f).round(1)
+    end
+  end
+  
+  def get_ratio_total
+    ratio_array = [ self.ratio_subtitle,
+                    self.ratio_translation,
+                    self.ratio_proof_reading,
+                    self.ratio_quality_assurance,
+                    self.ratio_other
+    ]
+    
+    ratio_array.compact!
+    
+    unless ratio_array.empty?
+      ratio_array.inject(:+).round(1) # clever way to add arrays
     end
   end
 
@@ -65,6 +80,8 @@ module JobStats
     self.ratio_proof_reading = to_ratio(@proof_reading)
     self.ratio_quality_assurance = to_ratio(@quality_assurance)
     self.ratio_other = to_ratio(@other)
+    
+    self.ratio_total = get_ratio_total
   end
     
 end

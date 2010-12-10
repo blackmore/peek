@@ -2,7 +2,7 @@ class Job
   include JobStats
   
   attr_accessor :subtitle_mins, :translation_mins, :proof_reading_mins, :quality_assurance_mins, :other_mins
-  attr_accessor :ratio_subtitle, :ratio_translation, :ratio_proof_reading, :ratio_quality_assurance, :ratio_other
+  attr_accessor :ratio_subtitle, :ratio_translation, :ratio_proof_reading, :ratio_quality_assurance, :ratio_other, :ratio_total
   attr_accessor :run_length
   
   include DataMapper::Resource
@@ -33,57 +33,56 @@ class Job
 
   # # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
   private
-  def self.get_stats(col)
-    col.each do |job|
-      job.statistics
-      #job.subtitle_mins = stats[:subtitle_mins]
-      puts "- #{job.subtitle_mins}- - - - - - SUM MINS- - - - - - - - - - - - - - - - - -"
-    end
-  end
+  #def build_stats(col)
+  #  col.each do |job|
+  #    job.statistics
+  #  end
+  #end
   
   def self.filter_jobs(params)
-     conditions = {:production_status => 2, :order => :deadline.desc,  }
+    conditions = {:production_status => 2, :order => :deadline.desc,  }
 
-      unless params[:start_date].blank? 
-        conditions["deadline.gte"] = Chronic::parse(params[:start_date])
+    unless params[:start_date].blank? 
+      conditions["deadline.gte"] = Chronic::parse(params[:start_date])
+    else
+      conditions["deadline.gte"] = Chronic::parse("01/01/1990")
+    end
+    
+    unless params[:end_date].blank? 
+      conditions["deadline.lte"] = Chronic::parse(params[:end_date])
+    else
+      conditions["deadline.lte"] = Time.now
+    end
+    
+    unless params[:source] == "All"
+      conditions[:description] = {:source_language => params[:source].to_i}
+    end
+    
+    unless params[:target] == "All"
+      if conditions.has_key?(:description)
+        conditions[:description].merge!({:target_language => params[:target].to_i})
       else
-        conditions["deadline.gte"] = Chronic::parse("01/01/1990")
+        conditions[:description] = {:target_language => params[:target].to_i}
       end
+    end
+    
+    unless params[:client] == "All"
+      conditions[:client] = {:id => params[:client]}
+    end
+    
+    unless params[:title].blank?
+      conditions["title.like"] = "%#{params[:title]}%"
+    end
+    
+    categories = params[:category].delete_if { |x| x == "" }
+    unless categories.empty?
+      conditions[:category] = categories
+    else
+      conditions[:category] = [1,2,3,6]
+    end
       
-      unless params[:end_date].blank? 
-        conditions["deadline.lte"] = Chronic::parse(params[:end_date])
-      else
-        conditions["deadline.lte"] = Time.now
-      end
-      
-      unless params[:source] == "All"
-        conditions[:description] = {:source_language => params[:source].to_i}
-      end
-      
-      unless params[:target] == "All"
-        if conditions.has_key?(:description)
-          conditions[:description].merge!({:target_language => params[:target].to_i})
-        else
-          conditions[:description] = {:target_language => params[:target].to_i}
-        end
-      end
-      
-      unless params[:client] == "All"
-        conditions[:client] = {:id => params[:client]}
-      end
-      
-      unless params[:title].blank?
-        conditions["title.like"] = "%#{params[:title]}%"
-      end
-      
-      categories = params[:category].delete_if { |x| x == "" }
-      unless categories.empty?
-        conditions[:category] = categories
-      else
-        conditions[:category] = [1,2,3,6]
-      end
-      
-    get_stats(all(conditions))
+    all(conditions)
   end
+  
   
 end

@@ -1,2 +1,4 @@
 $("#job_search_results").append("<%= escape_javascript(render(@jobs)) %>");
+$("#total_stats").html("<%= escape_javascript(render 'stats', :collection => @jobs) %>");
+
 

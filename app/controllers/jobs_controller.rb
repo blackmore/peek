@@ -10,10 +10,7 @@ class JobsController < ApplicationController
   
   def search
      @jobs = Job.filter_jobs(params[:search])
-     #@job_stats = []
-     # @job.each do |job|
-     #  @job_stats << job.statistics
-     # end
+     @jobs.collect { |job| job.statistics }
   end
   
   
