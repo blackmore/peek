@@ -40,6 +40,7 @@ gem 'dm-observer',          DM_VERSION
 gem 'jquery-rails'
 
 gem 'formtastic', '~> 1.2.0'
+#gem 'google_visualr', :git => 'git://github.com/burkestar/google_visualr.git'
 
 # Date time parsing
 gem 'chronic'
