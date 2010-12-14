@@ -23,11 +23,8 @@ $(function() {
 	// ajax loading mask 
 	$("#custom_search").bind("ajaxStart", function(){
 	    $overlay.fadeIn();
-		$("#total_stats_details").remove();
-	    $("#job_search_results tr:not(.table-header)").remove();
 	}).bind("ajaxStop", function(){
 	    $overlay.fadeOut();
 	});
-
-
+	
 });

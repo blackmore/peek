@@ -21,6 +21,21 @@ module JobsHelper
     end
   end
   
+  def total_work(jobs)
+    minutes = []
+    jobs.each do |job|
+      minutes << job.run_length
+    end
+    minutes.compact!
+    total_minutes = get_total(minutes)
+    if total_minutes > 60
+      quotient, remainder = total_minutes.divmod(50)
+      "#{quotient}h #{remainder.to_i}m"
+    else
+      "#{total_minutes}m"
+    end
+  end
+  
   def get_averages(arr)
     arr.compact!
     unless arr.empty?
