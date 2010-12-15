@@ -4,8 +4,8 @@
 	<% total_length, total_work, average_ratio =  total_stats(@jobs)%>
 	<ul id="list_stats">
 		<li><span class="value">Jobs in scope:</span><%= @jobs.length %></li>
-		<li><span class="value">Total Run Length:</span><%= total_work %></li>
-		<li><span class="value">Total Work Time:</span><%= total_length %></li>
+		<li><span class="value">Total Run Length:</span><%= total_length %></li>
+		<li><span class="value">Total Work Time:</span><%= total_work %></li>
 		<li><span class="value">Average Ratio:</span>1 : <%= average_ratio %></li>
 	</ul>
 	
