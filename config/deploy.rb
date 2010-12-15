@@ -19,7 +19,7 @@ set :branch, 'master'
 set :git_shallow_clone, 1
 set :scm_verbose, true
 server "10.1.1.201", :app, :web, :db, :primary => true, :user => 'administrator'
-set :rails_env, 'production'
+#set :rails_env, 'production'
 set :deploy_via, :export
 set :chmod755, "app config db lib public vendor script script/* public/disp*"
 set :use_sudo, true

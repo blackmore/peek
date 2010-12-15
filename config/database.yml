@@ -5,21 +5,21 @@ development:
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
   # LOCAL
   # # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-  database: peek_development
-  adapter: mysql
-  username: root
-  password: 
-  host:     localhost
+  # database: peek_development
+  # adapter: mysql
+  # username: root
+  # password: 
+  # host:     localhost
   
   <<: *defaults
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
   # PLATFORM
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-  # database: titelbild
-  # username: titelbild
-  # password: trackingpw
-  # host:     10.1.1.246
-  # socket: /tmp/mysql.sock
+  database: titelbild
+  username: titelbild
+  password: trackingpw
+  host:     10.1.1.246
+  socket: /tmp/mysql.sock
 
   # Add more repositories
   # repositories:
