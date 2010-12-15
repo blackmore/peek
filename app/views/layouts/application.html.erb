@@ -4,12 +4,13 @@
   <%= stylesheet_link_tag :all %>
   <%= javascript_include_tag 'jquery', 'jquery-ui', 'rails', 'application', 'highcharts'%>
   <script type='text/javascript' src='https://www.google.com/jsapi'></script>
+  <link  href="//fonts.googleapis.com/css?family=Cantarell:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css" >
   <%= csrf_meta_tag %>
   
 </head>
 <body>
-
-<%= yield %>
-
+	<div id="wrapper">
+		<%= yield %>
+	</div>
 </body>
 </html>

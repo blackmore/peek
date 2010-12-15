@@ -2,7 +2,7 @@ class Job
   include JobStats
   
   attr_accessor :subtitle_mins, :translation_mins, :proof_reading_mins, :quality_assurance_mins, :other_mins
-  attr_accessor :ratio_subtitle, :ratio_translation, :ratio_proof_reading, :ratio_quality_assurance, :ratio_other, :ratio_total
+  attr_accessor :ratio_total, :total_work
   attr_accessor :run_length
   
   include DataMapper::Resource

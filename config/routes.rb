@@ -1,6 +1,13 @@
 Peek::Application.routes.draw do
   #resources :jobs
   #get "jobs/index"
+  
+  # search_jobs GET    /jobs/search(.:format)   {:action=>"search", :controller=>"jobs"}
+  #      jobs GET    /jobs(.:format)          {:action=>"index", :controller=>"jobs"}
+  
+  #get "/subtitle_stats/" => "jobs/index"
+  get "/subtitle_stats" => "jobs#index"
+  get  "/search_jobs" => "jobs#search"
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
@@ -16,13 +23,13 @@ Peek::Application.routes.draw do
   # Sample resource route (maps HTTP verbs to controller actions automatically):
   #   resources :products
   
-   #Sample resource route with options:
-     resources :jobs do
-       collection do
-         get 'search'
-       end
-     end
-
+   ##Sample resource route with options:
+   #  resources :jobs do
+   #    collection do
+   #      get 'search'
+   #    end
+   #  end
+   #
   # Sample resource route with sub-resources:
   #   resources :products do
   #     resources :comments, :sales

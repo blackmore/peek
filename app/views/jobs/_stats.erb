@@ -1,15 +1,22 @@
 <% unless @jobs.empty? %>
-	<div id="total_stats_details">
-		<p>Jobs in scope: <%= @jobs.length %></p>
-		<p>Total Run Length: <%= total_minutes(@jobs) %></p>
-		<p>Total Work: <%= average_ratio_subtitles(@jobs) %></p>
-		<p>Ratio Total: <%= average_ratio_total(@jobs) %>
-	</div>
+
+	<!-- Display general stats -->
+	<% total_length, total_work, average_ratio =  total_stats(@jobs)%>
+	<ul id="list_stats">
+		<li><span class="value">Jobs in scope:</span><%= @jobs.length %></li>
+		<li><span class="value">Total Run Length:</span><%= total_work %></li>
+		<li><span class="value">Total Work Time:</span><%= total_length %></li>
+		<li><span class="value">Average Ratio:</span>1 : <%= average_ratio %></li>
+	</ul>
+	
+	<!-- Display scatter chart -->
+	<div id='chart_scatter'></div>
+	<%= raw @chart_scatter.render('chart_scatter') %>
+	
+	<!-- Display table -->
+	<div id='chart'></div>
+	<%= raw @chart.render('chart') %>
+
 <% else %>
-	<p>No matching jobs</p>
+	<p class="notice">No projects were found matching the above criteria</p>
 <% end %>
-
-<div id='chart_scatter02'></div>
-<%= raw @chart_scatter02.render('chart_scatter02') %>
-
-<div id='chart'></div><%= raw @chart.render('chart') %>

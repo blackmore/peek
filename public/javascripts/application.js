@@ -3,7 +3,7 @@
 $(function() {
 	$("#search_start_date").datepicker();
 	$("#search_end_date").datepicker();
-	var $overlay = $('<div class="ui-widget-overlay"><div id="loading">Loading</div></div>').hide().appendTo('body');
+	var $overlay = $('<div class="ui-widget-overlay"><div id="loading"></div></div>').hide().appendTo('body');
 	
 	//- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 	// Sets up the search form

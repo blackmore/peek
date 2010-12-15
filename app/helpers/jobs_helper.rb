@@ -13,27 +13,35 @@ module JobsHelper
     end
     minutes.compact!
     total_minutes = get_total(minutes)
-    if total_minutes > 60
-      quotient, remainder = total_minutes.divmod(50)
-      "#{quotient}h #{remainder.to_i}m"
-    else
-      "#{total_minutes}m"
-    end
   end
   
-  def total_work(jobs)
+  def total_work_time(jobs)
     minutes = []
     jobs.each do |job|
-      minutes << job.run_length
+      minutes << job.total_work
     end
     minutes.compact!
     total_minutes = get_total(minutes)
-    if total_minutes > 60
-      quotient, remainder = total_minutes.divmod(50)
+  end
+  
+  def format_to_hours(minutes)
+    if minutes > 60
+      quotient, remainder = minutes.divmod(50)
       "#{quotient}h #{remainder.to_i}m"
     else
-      "#{total_minutes}m"
+      "#{minutes}m"
     end
+  end
+  
+  def average_ratio(time, work)
+    (work/time).round(1)
+  end
+  
+  def total_stats(jobs)
+    total_minutes = total_minutes(jobs)
+    total_work = total_work_time(jobs)
+    
+    return format_to_hours(total_minutes), format_to_hours(total_work), average_ratio(total_minutes, total_work)
   end
   
   def get_averages(arr)

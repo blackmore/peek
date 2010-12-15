@@ -1,8 +1,25 @@
+/* @override http://0.0.0.0:3000/stylesheets/global_styles.css?1292362861 */
+
 /* @override http://0.0.0.0:3000/stylesheets/global_styles.css?1291111896 */
 
+
 body {
-	font: 17px "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
+	font: 15px "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
 }
+
+#wrapper {
+	width: 1100px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+p.blockText {
+	width: 70%;
+	margin-bottom: 40px;
+	border-bottom: 1px solid #bbc1d2;
+	padding-bottom: 10px;
+}
+
 
 #loading {
 	color: white;
@@ -12,8 +29,33 @@ body {
 	margin-left: auto;
 	margin-top: 200px;
 	display: block;
+	width: 100%;
+	height: 100%;
 }
 
-span.data_missing {
-	color: #cc0101;
+ul#list_stats {
+	border-top: 1px solid #bbc1d2;
+	padding-top: 15px;
+	list-style-type: none;
+	padding-left: 20px;
+	padding-bottom: 20px;
+	border-bottom: 1px solid #bbc1d2;
+	background-color: #f2f5f9;
+}
+
+span.value {
+	width: 170px;
+	display: block;
+	float: left;
+}
+
+div#chart {
+	border-top: 1px solid #bbc1d2;
+	margin-top: 20px;
+	padding-top: 40px;
+	margin-bottom: 40px;
+}
+
+#list_stats li {
+	padding-top: 5px;	
 }

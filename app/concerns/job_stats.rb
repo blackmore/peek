@@ -1,15 +1,3 @@
-# subtitle
-# translation
-# proof_reading
-# quality_assurance
-# other
-# ratio_subtitle
-# ratio_translation
-# ratio_proof_reading
-# ratio_quality_assurance
-# ratio_other
-# run_length
-
 module JobStats
 
   def to_minutes(str)
@@ -28,24 +16,17 @@ module JobStats
     end
   end
   
-  def to_ratio(minutes)
-    unless minutes.nil? || self.run_length.nil? || minutes == 0 || self.run_length == 0
-      (minutes/self.run_length.to_f).round(1)
+  def get_ratio_total
+    unless self.total_work.nil? || self.run_length.nil? || self.run_length == 0
+      (self.total_work/self.run_length.to_f).round(1)
     end
   end
   
-  def get_ratio_total
-    ratio_array = [ self.ratio_subtitle,
-                    self.ratio_translation,
-                    self.ratio_proof_reading,
-                    self.ratio_quality_assurance,
-                    self.ratio_other
-    ]
+  def add_array_values(array)
+    array.compact!
     
-    ratio_array.compact!
-    
-    unless ratio_array.empty?
-      ratio_array.inject(:+).round(1) # clever way to add arrays
+    unless array.empty?
+      array.inject(:+) # clever way to add arrays
     end
   end
 
@@ -74,12 +55,7 @@ module JobStats
     self.proof_reading_mins = @proof_reading
     self.quality_assurance_mins = @quality_assurance
     self.other_mins = @other
-    
-    self.ratio_subtitle = to_ratio(@subtitle)
-    self.ratio_translation = to_ratio(@translation)
-    self.ratio_proof_reading = to_ratio(@proof_reading)
-    self.ratio_quality_assurance = to_ratio(@quality_assurance)
-    self.ratio_other = to_ratio(@other)
+    self.total_work = add_array_values([@subtitle, @translation, @proof_reading, @quality_assurance, @other])
     
     self.ratio_total = get_ratio_total
   end
