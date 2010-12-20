@@ -35,11 +35,7 @@ class JobsController < ApplicationController
   
   def set_v_and_f(*arg)
     unless arg[0].nil?
-      if arg.include?("1 :")
-        Hash[:v => arg[0], :f => " #{arg[1]} #{arg[0]}"]
-      else
-        Hash[:v => arg[0], :f => "#{arg[0]} #{arg[1]}"]
-      end
+      Hash[:v => arg[0], :f => "#{arg[0]} #{arg[1]}"]
     else
       Hash[:v => 0, :f => "-"]
     end
@@ -72,7 +68,7 @@ class JobsController < ApplicationController
       row_hash[:c] << set_v_and_f(job.quality_assurance_mins, "mins")
       row_hash[:c] << set_v_and_f(job.other_mins, "mins")
       row_hash[:c] << set_v_and_f(job.total_work, "mins")
-      row_hash[:c] << set_v_and_f(job.ratio_total, "1 :")
+      row_hash[:c] << set_v_and_f(job.ratio_total, ": 1")
       
       data_array << row_hash
     end
