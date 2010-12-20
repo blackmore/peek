@@ -1,4 +1,13 @@
 class JobsController < ApplicationController
+  
+  # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+  # DUCK ARRAY
+  class Array
+    def count_by(&block)
+      Hash[*group_by(&block).collect{|x,g| [x,g.size]}.flatten]
+    end
+  end
+  # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
   def index  
     @languages = Language.all_order.collect { |p| [ p.language, p.id ] }
@@ -15,6 +24,7 @@ class JobsController < ApplicationController
     # build google charts
     @chart = build_table
     @chart_scatter = build_scatter_chart
+    # @chart_pie = build_pie_chart
   end
   
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -123,4 +133,49 @@ class JobsController < ApplicationController
     
     return chart
   end
+  
+
+  
+  # # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+  # # BUILD PIE CHART
+  # # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+  # def build_pie_chart
+  #   
+  # 
+  #   
+  #   pie_group = @jobs.collect { |job| job.ratio_total }
+  #   puts pie_group.inspect
+  #   
+  #   pie_group.count_by do |ratio|
+  #     case ratio
+  #     when (0..10) then :under_ten
+  #     when (10..15) then :ten_fifteen
+  #     when (15..20) then :fifteen_twenty
+  #     when (20..25) then :twenty_twentyfive
+  #     when (25..1000) then :over_25
+  #     end 
+  #   end
+  #   puts pie_group.inspect
+  #   
+  #   # chart = GoogleVisualr::PieChart.new({
+  #   #                       :cols =>  [ 
+  #   #                         { :id => 'ratio', :type => 'string' },
+  #   #                         { :id => 'ratio', :label => 'Ratio', :type => 'number' }
+  #   #                         ],
+  #   #                       :rows =>  [
+  #   #                                  {:c => ['under_ten', pie_group[:under_ten]}
+  #   #                         ]
+  #   #                       })
+  #   # 
+  #   # options = { :width => 400, :height => 240, :title => 'My Daily Activities', :is3D => true }
+  #   # 
+  #   # options.each_pair do | key, value |
+  #   #   chart.send "#{key}=", value
+  #   # end
+  #   # 
+  #   # return chart    
+  #   
+  # end
+
+  
 end
