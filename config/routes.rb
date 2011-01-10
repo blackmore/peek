@@ -1,4 +1,6 @@
 Peek::Application.routes.draw do
+  get "users/index"
+
   #resources :jobs
   #get "jobs/index"
   

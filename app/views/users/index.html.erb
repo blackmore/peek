@@ -1,0 +1,25 @@
+<h1>Users</h1>
+<% @users.group_by(&:mother_tongue).sort.each do |language, user| %>
+	<h3><%= language %></h3>
+	<ul class="users">
+		<% user.sort_by(&:name).each do |usr| %>
+		<li class="<%= usr.role %>">
+			<div class="user_wrap">
+				<%= usr.name %>
+				<div class="badges">
+					<div class="current">
+						<span>
+							<%= usr.current_jobs > 0 ? usr.current_jobs : "" %>
+						</span>
+					</div>
+					<div class="stacked">
+						<span>
+							<%= usr.stacked_jobs > 0 ? usr.stacked_jobs : "" %>
+						</span>
+					</div>
+				</div>
+			</div>
+		</li>
+		<% end %>
+	</ul>
+<% end %>
