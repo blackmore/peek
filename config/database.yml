@@ -28,13 +28,4 @@ test:
   <<: *defaults
   
 production:
-  database: peek_production
-  <<: *defaults
-  # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-  # PLATFORM
-  # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-  database: titelbild
-  username: titelbild
-  password: trackingpw
-  host:     10.1.1.246
-  socket:   /tmp/mysql.sock
+  <%= bcdb.production :peek, :prod %>

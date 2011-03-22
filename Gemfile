@@ -11,6 +11,7 @@ gem 'railties',           RAILS_VERSION, :require => 'rails'
 gem 'dm-rails',          '~> 1.0.4'
 gem 'dm-mysql-adapter', DM_VERSION
 gem 'capistrano'
+gem 'bcdatabase'
 
 # You can use any of the other available database adapters.
 # This is only a small excerpt of the list of all available adapters
