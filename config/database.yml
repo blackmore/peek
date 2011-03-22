@@ -1,3 +1,8 @@
+<%
+  require 'bcdatabase'
+  bcdb = Bcdatabase.load
+%>
+
 defaults: &defaults
   adapter:  mysql
 
