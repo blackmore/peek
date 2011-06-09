@@ -41,7 +41,7 @@ module JobsHelper
     total_minutes = total_minutes(jobs)
     total_work = total_work_time(jobs)
     
-    return format_to_hours(total_minutes), format_to_hours(total_work), average_ratio(total_minutes, total_work)
+    return total_minutes, total_work, average_ratio(total_minutes, total_work)
   end
   
   def get_averages(arr)
