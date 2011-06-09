@@ -30,6 +30,10 @@ GEM
     activesupport (3.0.3)
     addressable (2.2.2)
     arel (2.0.4)
+    bcdatabase (1.0.5)
+      activesupport (>= 2.0)
+      highline (~> 1.5)
+      i18n
     builder (2.1.2)
     capistrano (2.5.19)
       highline
@@ -155,6 +159,7 @@ DEPENDENCIES
   actionmailer (~> 3.0.1)
   actionpack (~> 3.0.1)
   activesupport (~> 3.0.1)
+  bcdatabase
   capistrano
   chronic
   dm-aggregates (~> 1.0.2)

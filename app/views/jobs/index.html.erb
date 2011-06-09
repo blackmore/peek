@@ -4,6 +4,7 @@ The two date fields set the scope referencing the projects <strong>deadline</str
 Statistics are only based on completed projects  as any unfinished projects would give false results.</p>
 <%=  semantic_form_for :search, :html => { :method => :get, :id => "custom_search" }, :url => search_jobs_path, :remote => true do |form| %>
 	<%= form.inputs do %>
+	
 		<%= form.input :category,
 		:label => "Job Type",
 		:as => :check_boxes,

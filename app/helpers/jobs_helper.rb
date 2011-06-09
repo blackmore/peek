@@ -26,7 +26,7 @@ module JobsHelper
   
   def format_to_hours(minutes)
     if minutes > 60
-      quotient, remainder = minutes.divmod(50)
+      quotient, remainder = minutes.divmod(60)
       "#{quotient}h #{remainder.to_i}m"
     else
       "#{minutes}m"
